@@ -14,9 +14,9 @@ public class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandl
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         if (e instanceof NonFatalException) {
-            logger.error("线程[{}],发生异常了", t.getName(), e);
+            logger.error("线程[{}],发生运行时异常了", t.getName(), e);
         } else if (e instanceof FatalException) {
-            logger.error("线程[{}],发生异常了", t.getName(), e);
+            logger.error("线程[{}],发生致命异常了", t.getName(), e);
         } else
             logger.error("线程[{}],发生异常了", t.getName(), e);
     }

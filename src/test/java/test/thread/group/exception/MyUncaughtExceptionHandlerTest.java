@@ -19,8 +19,12 @@ public class MyUncaughtExceptionHandlerTest {
      */
     public static void main(String[] args) {
         // 线程的异常处理
-        Thread.currentThread().setUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
-        logger.info("这里将要发生异常");
-        throw new NonFatalException("001", "haha");
+        Runnable runnable = () -> {
+            logger.info("这里将要发生异常");
+            throw new NonFatalException("001", new Object());
+        };
+        Thread thread = new Thread(runnable, "异常线程");
+        thread.setUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
+        thread.start();
     }
 }
